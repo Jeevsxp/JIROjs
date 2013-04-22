@@ -17,7 +17,8 @@ examples:
 
 	$(selector).jiro.('addCont',function,{under:breakPoint,over:breakPoint});
 	
-Coming Soon:	
+Coming Soon:
+	
 	$(selector).jiro.('addCont',function,{
 		width:{under:breakPoint,over:breakPoint},
 		height:{under:breakPoint,over:breakPoint}	
