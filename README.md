@@ -15,8 +15,13 @@ continuous:
 over/under values are optional
 examples:
 
-	$(selector).('jiro.addCont',function,{under:breakPoint,over:breakPoint});
-	$(selector).('jiro.addCont',function,{width:{under:breakPoint,over:breakPoint},height:{under:breakPoint,over:breakPoint});
+	$(selector).jiro.('addCont',function,{under:breakPoint,over:breakPoint});
+	
+Coming Soon:	
+	$(selector).jiro.('addCont',function,{
+		width:{under:breakPoint,over:breakPoint},
+		height:{under:breakPoint,over:breakPoint}	
+	);
 
 switch:
 needs a toggel function or seperate over,under functions
