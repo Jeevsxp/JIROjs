@@ -73,7 +73,6 @@
 				var $this;
 				while(array.length>0){
 					$this=array.pop();
-					$($this.obj).css('background-color','red');
 					handler.call($this.obj,$this);
 				}
 			}
@@ -122,8 +121,8 @@
 		addCont:function(func,breakPoints){
 		var $this=this;
 			function toggle(state,funct){
-				$(document)[state]('ready',{obj:$this},funct);
-				$(window)[state]('resize',{obj:$this},funct);
+				$(document)[state]('ready.jiro',{obj:$this},funct);
+				$(window)[state]('resize.jiro',{obj:$this},funct);
 			}
 			if(arguments.length>1){
 				if('over'in breakPoints){
