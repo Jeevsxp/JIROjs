@@ -1,5 +1,10 @@
+JIROjs
+==========
+A responsive jQuery plugin. Allows you to execute JavaScript/jQuery dependant on screen size.
+
+
 JIRO-0.2.1 reference
-==================
+---------------------
 Insert after jQuery
 
 <!-- jQuery -->
