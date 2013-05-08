@@ -2,16 +2,18 @@ JIROjs
 ==========
 A responsive jQuery plugin. Allows you to execute JavaScript/jQuery dependant on screen size.
 
+Only 3.8KB minified and even less when gzipped!
+
 
 JIRO-0.2.2 reference
 ---------------------
-Insert after jQuery
-
+Insert after jQuery like this:
+```
 <!-- jQuery -->
-		<script type="text/javascript" src="scripts/jquery-1.9.1.min.js"></script>
+	<script type="text/javascript" src="scripts/jquery-1.9.1.min.js"></script>
 <!-- jiro -->
-	<script type="text/javascript"src="jiro-0.2.1.min.js"></script>
-
+	<script type="text/javascript"src="jiro-0.2.2.min.js"></script>
+```
 Make sure the objects being used have been loaded by the browser.
 
 Methods
