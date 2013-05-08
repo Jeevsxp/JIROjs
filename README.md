@@ -6,7 +6,7 @@ Only 3.8KB minified and even less when gzipped!
 
 
 JIRO-0.2.2 reference
----------------------
+======================
 Insert after jQuery like this:
 ```
 <!-- jQuery -->
