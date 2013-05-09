@@ -6,7 +6,7 @@ Only 3.8KB minified and even less when gzipped!
 
 
 JIRO-0.2.2 reference
-======================
+----------------------
 Insert after jQuery like this:
 ```
 <!-- jQuery -->
@@ -16,8 +16,7 @@ Insert after jQuery like this:
 ```
 Make sure the objects being used have been loaded by the browser.
 
-Methods
-----------
+###Methods
 continuous:
 over/under values are optional
 examples:
@@ -47,8 +46,7 @@ examples:
 		{over:{bp:val,bp2:val2,...limit:'current'},under:{bp:val,bp2:val2,...limit:'current'}
 	);
 
-Upcoming features
---------------------
+###Upcoming features
 auto method detection
 do now option, for ajax calls before the dom loads
 obj and selector support
