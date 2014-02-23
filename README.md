@@ -12,7 +12,7 @@ to all or one of these.
   implement
 
 
-Only 4.57KB when minified and 1.67KB minified and gzipped!
+Only ~4.6KB when minified and ~1.7KB minified and gzipped!
 
 ###Demos
 Horizontal menu to drop down. (To Do)  
