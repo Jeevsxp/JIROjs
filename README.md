@@ -41,7 +41,7 @@ results you want.
 ```JavaScript
 $(selector).jiro.('addSwitch',breakPoint,{over:function,under:function});
 
-$(selector).jiro.('addSwitch',{bp:breakPoint,<b>options</b>},{over:function,under:function});
+$(selector).jiro.('addSwitch',{bp:breakPoint,*options*},{over:function,under:function});
 ```
 
 This lets you run a function when the property (default is width) goes 
@@ -103,7 +103,7 @@ in the jQuery selector.
 
 #####Continuous method
 ```JavaScript
-$(selector).jiro.('addCont',function,{**options**});
+$(selector).jiro.('addCont',function,{*options*});
 ```
 
 Lets you add a function to run continuously between two breakpoints. 
@@ -140,7 +140,7 @@ $(selector).jiro.('addStep',
 	{elem:element,prop:property function},
 	{over:{bp:val,bp2:val2,...limit:'current'},
  under:{bp:val,bp2:val2,...limit:'current'},
- **options**}
+ *options*}
 );
 ````
 ```JavaScript
@@ -148,7 +148,7 @@ $(selector).jiro.('addStep',
 	{elem:element,css:property},
 	{over:{bp:val,bp2:val2,...limit:'current'},
  under:{bp:val,bp2:val2,...limit:'current'},
- **options**}
+ *options*}
 );
 ```
 ```JavaScript
@@ -156,7 +156,7 @@ $(selector).jiro.('addStep',
 	{getter:function,setter:function},
 	{over:{bp:val,bp2:val2,...limit:'current'},
  under:{bp:val,bp2:val2,...limit:'current'},
- **options**}
+ *options*}
 );
 ```
 
