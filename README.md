@@ -41,13 +41,13 @@ results you want.
 ```JavaScript
 $(selector).jiro.('addSwitch',breakPoint,{over:function,under:function});
 
-$(selector).jiro.('addSwitch',{bp:breakPoint,**options**},{over:function,under:function});
+$(selector).jiro.('addSwitch',{bp:breakPoint,<b>options</b>},{over:function,under:function});
 ```
 
 This lets you run a function when the property (default is width) goes 
 over or under the given 'break point'.
 
-**options**
+**options**  
 event  
 _default_ event:'resize'  
 Allows you to specify the event that triggers execution of the function 
@@ -109,7 +109,7 @@ $(selector).jiro.('addCont',function,{**options**});
 Lets you add a function to run continuously between two breakpoints. 
 Or one or no breakpoints.
 
-**options**
+**options**  
 (Same as switch plus):
 
 under  
@@ -162,7 +162,7 @@ $(selector).jiro.('addStep',
 
 Lets you change to a range of different values at different breakpoints for a specified property.
 
-**Options**
+**Options**  
 Same as switch
 
 ###Upcoming features
