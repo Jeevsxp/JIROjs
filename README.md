@@ -24,7 +24,7 @@ How to use me
 JIROjs is a jquery plugin and initialising it is simple.
 
 Insert after jQuery like this:
-```
+```html
 <!-- jQuery -->
 	<script type="text/javascript" src="scripts/jquery-x.x.x.min.js"></script>
 <!-- jiro -->
@@ -37,7 +37,7 @@ results you want.
 
 ###Methods
 
-#####Switch method
+####Switch method
 ```JavaScript
 $(selector).jiro.('addSwitch',breakPoint,{over:function,under:function});
 
@@ -101,7 +101,7 @@ Also accepts 'this', which makes this the same as the target specified
 in the jQuery selector.
 
 
-#####Continuous method
+####Continuous method
 ```JavaScript
 $(selector).jiro.('addCont',function,{*options*});
 ```
@@ -134,7 +134,7 @@ $('#target').jiro.('addCont',function,{over:460});
 
 The function will not continue to be triggered when property is below 460.
 
-#####Step method
+####Step method
 ```JavaScript
 $(selector).jiro.('addStep',
 	{elem:element,prop:property function},
