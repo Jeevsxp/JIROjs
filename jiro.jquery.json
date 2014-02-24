@@ -1,0 +1,27 @@
+{
+	"name":"jiro",
+	"version":"1.0.0.0",
+	"title":"JIROjs",
+	"author":{
+		"name":"Jeevan Khaira"
+		},
+	"licenses":[
+		{
+			"type":"MPL-2.0",
+			"url":"http://mozilla.org/MPL/2.0/"
+		}
+	],
+	"description":"Resposive jQuery plugin.",
+	"keywords:[
+		"responsive",
+		"web",
+		"design",
+		"RWD",
+		"javascript",
+		"respond",
+		"easily"
+	],
+	"homepage":"https://github.com/Jeevsxp/JIROjs/",
+	"docs":"https://github.com/Jeevsxp/JIROjs/blob/master/README.md",
+	"bugs":"https://github.com/Jeevsxp/JIROjs/issues"
+}
