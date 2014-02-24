@@ -1,6 +1,6 @@
 {
 	"name":"jiro",
-	"version":"1.0.0.0",
+	"version":"1.0.0",
 	"title":"JIROjs",
 	"author":{
 		"name":"Jeevan Khaira"
@@ -11,6 +11,9 @@
 			"url":"http://mozilla.org/MPL/2.0/"
 		}
 	],
+	"dependencies":{
+        "jquery": ">=1.0.0"
+    },
 	"description":"Resposive jQuery plugin.",
 	"keywords":[
 		"responsive",
