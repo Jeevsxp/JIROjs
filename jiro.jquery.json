@@ -1,6 +1,6 @@
 {
 	"name":"jiro",
-	"version":"1.0.0",
+	"version":"1.1.0",
 	"title":"JIROjs",
 	"author":{
 		"name":"Jeevan Khaira"
@@ -14,7 +14,7 @@
 	"dependencies":{
         "jquery": ">=1.0.0"
     },
-	"description":"Resposive jQuery plugin.",
+	"description":"Resposive jQuery plugin. Easily respond to break points on any type of event.",
 	"keywords":[
 		"responsive",
 		"web",
@@ -22,7 +22,9 @@
 		"RWD",
 		"javascript",
 		"respond",
-		"easily"
+		"easy",
+		"break",
+		"point"		
 	],
 	"homepage":"https://github.com/Jeevsxp/JIROjs/",
 	"docs":"https://github.com/Jeevsxp/JIROjs/blob/master/README.md",

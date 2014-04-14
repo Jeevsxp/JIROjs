@@ -28,7 +28,7 @@ Insert after jQuery like this:
 <!-- jQuery -->
 	<script type="text/javascript" src="scripts/jquery-x.x.x.min.js"></script>
 <!-- jiro -->
-	<script type="text/javascript"src="jiro-1.0.0.min.js"></script>
+	<script type="text/javascript" src="jiro-1.1.0.min.js"></script>
 ```
 Make sure the objects being used have been loaded by the browser.
 
@@ -39,9 +39,9 @@ results you want.
 
 ####Switch method
 ```JavaScript
-$(selector).jiro.('addSwitch',breakPoint,{over:function,under:function});
+$(selector).jiro('addSwitch',breakPoint,{over:function,under:function});
 
-$(selector).jiro.('addSwitch',{bp:breakPoint,*options*},{over:function,under:function});
+$(selector).jiro('addSwitch',{bp:breakPoint,*options*},{over:function,under:function});
 ```
 
 This lets you run a function when the property (default is width) goes 
@@ -79,7 +79,7 @@ e.g.
 $.fn.jiro.custom.halfWidth=function(){
 	return $(this).width()/2;
 }
-$('#target').jiro.('addCont',function,{prop:'jiro.custom.halfWidth'});
+$('#target').jiro('addCont',function,{prop:'jiro.custom.halfWidth'});
 ```
 
 Also the use of 'this' to refers to the target element specified in the 
@@ -103,7 +103,7 @@ in the jQuery selector.
 
 ####Continuous method
 ```JavaScript
-$(selector).jiro.('addCont',function,{*options*});
+$(selector).jiro('addCont',function,{*options*});
 ```
 
 Lets you add a function to run continuously between two breakpoints. 
@@ -118,7 +118,7 @@ Allows you to specify an upper limit for the function to operate at.
 
 e.g.
 ```JavaScript
-$('#target').jiro.('addCont',function,{under:580});
+$('#target').jiro('addCont',function,{under:580});
 ```
 
 The function will not continue to be triggered when property is above 580.
@@ -129,34 +129,34 @@ Allows you to specify a lower limit for the function to operate at.
 
 e.g.
 ```JavaScript
-$('#target').jiro.('addCont',function,{over:460});
+$('#target').jiro('addCont',function,{over:460});
 ```
 
 The function will not continue to be triggered when property is below 460.
 
 ####Step method
 ```JavaScript
-$(selector).jiro.('addStep',
-	{elem:element,prop:property function},
+$(selector).jiro('addStep',
+	{elem:element,prop:function},
 	{over:{bp:val,bp2:val2,...limit:'current'},
- under:{bp:val,bp2:val2,...limit:'current'},
- *options*}
+	 under:{bp:val,bp2:val2,...limit:'current'},
+	 *options*}
 );
 ````
 ```JavaScript
-$(selector).jiro.('addStep',
+$(selector).jiro('addStep',
 	{elem:element,css:property},
 	{over:{bp:val,bp2:val2,...limit:'current'},
- under:{bp:val,bp2:val2,...limit:'current'},
- *options*}
+	 under:{bp:val,bp2:val2,...limit:'current'},
+	 *options*}
 );
 ```
 ```JavaScript
-$(selector).jiro.('addStep',
+$(selector).jiro('addStep',
 	{getter:function,setter:function},
 	{over:{bp:val,bp2:val2,...limit:'current'},
- under:{bp:val,bp2:val2,...limit:'current'},
- *options*}
+	 under:{bp:val,bp2:val2,...limit:'current'},
+	 *options*}
 );
 ```
 
@@ -166,6 +166,7 @@ Lets you change to a range of different values at different breakpoints for a sp
 Same as switch
 
 ###Upcoming features
+breakpoints sync'ed with CSS @media
 trickel down resize event-wormholes!?(instead of bubbeling up)
 
 License

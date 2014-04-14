@@ -43,9 +43,15 @@
 		defaults:{event:'resize',prop:'width',capture:window},
 		actionAppendSettings:function(settings){
 			var options={};
+			settings=(settings===undefined)?{}:settings;
 			options.event=settings.event||jiro.model.defaults.event;
 			options.prop=settings.prop||jiro.model.defaults.prop;
-			options.capture=settings.capture||jiro.model.defaults.capture;//'this' could capture on this elem
+			if(settings.capture==='this'){
+				options.capture=this;
+			}else{
+				options.capture=settings.capture||jiro.model.defaults.capture;
+				options.capture=$(options.capture);
+			}
 			options.propFunc=jiro.common.stringToFunction(options.prop);
 			options.propFunc=jiro.common.addThis(this,options.propFunc);
 			return options;
@@ -58,18 +64,14 @@
 				options={capture:settings.capture,event:settings.event};
 				data={prevPropValue:0,actions:[],pointer:0,propFunc:settings.propFunc,waitingForInit:true,settings:options};
 				climbed=0;
-				node=['jiro',settings.capture,settings.event,settings.prop];
-				createNode[4]=function(){obj[node[0]]={};};
-				createNode[3]=function(){obj[node[0]][node[1]]={};};
-				createNode[2]=function(){obj[node[0]][node[1]][node[2]]={};};
-				createNode[1]=function(){obj[node[0]][node[1]][node[2]][node[3]]=data;};
+				node=['jiro','responsive',settings.capture,settings.event,settings.prop];
+				createNode[5]=function(){obj[node[0]]={};};
+				createNode[4]=function(){obj[node[0]][node[1]]={};};
+				createNode[3]=function(){obj[node[0]][node[1]][node[2]]={};};
+				createNode[2]=function(){obj[node[0]][node[1]][node[2]][node[3]]={};};
+				createNode[1]=function(){obj[node[0]][node[1]][node[2]][node[3]][node[4]]=data;};
 				createNode[0]=function(){
-					var dataObj;
-					if(typeof action!=='array'){//could add dataObj to array over and under functions aswell
-						dataObj=obj[node[0]][node[1]][node[2]][node[3]];//is it really needed?
-						action.underFunction=jiro.common.addThis(dataObj,action.underFunction);
-						action.overFunction=jiro.common.addThis(dataObj,action.overFunction);
-					}
+					var dataObj=obj[node[0]][node[1]][node[2]][node[3]][node[4]];
 					dataObj.actions=dataObj.actions.concat(action);
 				};
 				(function tryCatch(i){
@@ -88,12 +90,12 @@
 						}
 					}
 				})(0);
-				data={objData:obj[node[0]][node[1]][node[2]][node[3]]};
+				data={objData:obj[node[0]][node[1]][node[2]][node[3]][node[4]]};
 				if(climbed>0){
-					$(settings.capture).one('init.jiro',data,jiro.view.init);
+					settings.capture.one('init.jiro',data,jiro.view.init);
 				}else if(!(data.objData.waitingForInit)){
 					data.objData.waitingForInit=true;
-					$(settings.capture).one('init.jiro',data,jiro.view.set);
+					settings.capture.one('init.jiro',data,jiro.view.set);
 				}
 			});
 			/*jiro.model.actionAppend({
@@ -141,7 +143,40 @@
 		init:function(event){
 			var obj=event.data.objData.settings;
 			jiro.view.set(event);
-			$(obj.capture).on(obj.event+'.jiro',event.data,jiro.view.iterate);
+			obj.capture.on(obj.event+'.jiro',event.data,jiro.view.iterate);
+		}
+	};
+	jiro.css={
+		save:function(cssProperties){
+			var property,i,data,cssObj,$this=this;
+			data=$this.data('jiro');
+			if(data===undefined){
+				$this.data('jiro',{css:{}});
+				data=$this.data('jiro');
+			}else if(!(data.hasOwnProperty('css'))){
+				data.css={};
+			}
+			cssObj={};
+			for(i=0;i<cssProperties.length;i++){
+				property=cssProperties[i];
+				cssObj[property]=$this.css(property);
+			}
+			data.css=$.extend(cssObj,data.css);
+		},
+		object:function(cssObj){
+			var cssProperties=[],prop,$this=this;
+			for(prop in cssObj){
+				if(cssObj.hasOwnProperty(prop)){
+					cssProperties.push(prop);
+				}
+			}
+			jiro.css.save.call($this,cssProperties);
+			$this.css(cssObj);
+		},
+		string:function(cssProp,value){
+			var $this=this;
+			jiro.css.save.call($this,[cssProp]);
+			$this.css(cssProp,value);
 		}
 	};
 	jiro.user={
@@ -153,7 +188,7 @@
 				settings=jiro.model.actionAppendSettings.call($this,{});
 			}else{
 				breakPoint=response.bp;
-				settings=jiro.actionAppendSettings.call($this,response);
+				settings=jiro.model.actionAppendSettings.call($this,response);
 			}
 			action.breakPoint=breakPoint;
 			if(func.hasOwnProperty('toggle')){
@@ -165,25 +200,26 @@
 			}
 			jiro.model.actionAppend.call(this,action,settings);
 		},
-		addCont:function(func,settings){
-			var under,over,$this=this;
+		addCont:function(func,options){
+			var under,over,settings,$this=this;
 			over=0;
-			settings=jiro.model.actionAppendSettings.call($this,settings);
+			options=(options===undefined)?{}:options;
+			settings=jiro.model.actionAppendSettings.call($this,options);
 			func=jiro.common.addThis($this,func);
 			function toggle(state){
 				return function(){
-					$(settings.capture)[state](settings.event+'.jiro',func);
+					settings.capture[state](settings.event+'.jiro',func);
 					if(!this.waitingForInit){
 						func();//split this into a seperate function to make this more accurate
 					}
 				};
 			}
-			if(settings.hasOwnProperty('under')){
-				under=settings.under;
+			if(options.hasOwnProperty('under')){
+				under=options.under;
 				jiro.model.actionAppend.call($this,{breakPoint:under,overFunction:toggle('off'),underFunction:toggle('on')},settings);
 			}
-			if(settings.hasOwnProperty('over')){
-				over=settings.over;
+			if(options.hasOwnProperty('over')){
+				over=options.over;
 				jiro.model.actionAppend.call($this,{breakPoint:over,overFunction:toggle('on'),underFunction:toggle('off')},settings);
 			}else if(under===undefined){
 				toggle('on')();
@@ -200,15 +236,19 @@
 			settings=jiro.model.actionAppendSettings.call($this,values);
 			array={};
 			actions=[];
-			if((!(property.hasOwnProperty('getter')))&&(property.hasOwnProperty('css'))){
-				property.getter=function(){return $(property.elem).css(property.css);};
-			}else{
-				property.getter=function(){return $(property.elem)[property.prop]();};
+			if(!(property.hasOwnProperty('getter'))){
+				if(property.hasOwnProperty('css')){
+					property.getter=function(){return $(property.elem).css(property.css);};
+				}else if(property.hasOwnProperty('prop')){
+					property.getter=function(){return $(property.elem)[property.prop]();};
+				}
 			}
-			if((!(property.hasOwnProperty('setter')))&&(property.hasOwnProperty('css'))){
-				property.setter=function(val){return $(property.elem).css(property.css,val);};
-			}else{
-				property.setter=function(val){return $(property.elem)[property.prop](val);};
+			if(!(property.hasOwnProperty('setter'))){
+				if(property.hasOwnProperty('css')){
+					property.setter=function(val){return $(property.elem).css(property.css,val);};
+				}else if(property.hasOwnProperty('prop')){
+					property.setter=function(val){return $(property.elem)[property.prop](val);};
+				}
 			}
 			current=property.getter();
 			function append(bp,overValue,underValue){
@@ -238,13 +278,33 @@
 				append(array.under[array.under.length-1].key,limit,array.under[array.under.length-1].value);
 			}
 			jiro.model.actionAppend.call($this,actions,settings);
+		},
+		css:function(prop){
+			var $this=this;
+			if(typeof prop==='object'){
+				jiro.css.object.call($this,prop);
+			}else if(typeof prop==='string'){
+				jiro.css.string.apply($this,arguments);
+			}else{
+				console.log('Incorrect argument type for jQuery.jiro.css');
+			}
+		},
+		cssRestore:function(){
+			var $this=this;
+			try{
+				$this.css($this.data('jiro').css);
+			}catch(e){
+				console.log('jQuery.jiro: "cssRestore" unsuccessful, no data to restore to');
+			}
 		}
 	};
 	$.fn.jiro=function(method){
 		var $this=this;
 		if(jiro.user[method]){
 			jiro.user[method].apply($this,Array.prototype.slice.call(arguments,1));
-			$this.trigger('init.jiro');
+			$(function(){
+				$this.trigger('init.jiro');
+			});
 		}else{
 			console.log('Method "'+method+'" does not exist in jQuery.jiro');
 		}	
