@@ -12,7 +12,7 @@ to all or one of these.
   implement
 
 
-Only ~4.6KB when minified and ~1.7KB minified and gzipped!
+Only ~5.5KB when minified and ~2KB minified and gzipped!
 
 ###Demos
 Horizontal menu to drop down. (To Do)  
@@ -164,6 +164,29 @@ Lets you change to a range of different values at different breakpoints for a sp
 
 **Options**  
 Same as switch
+
+###css method
+```JavaScript
+$(selector).jiro('css',propertyName,value);
+```
+```JavaScript
+$(selector).jiro('css',{
+	property1:value1,
+	property2:value2...
+});
+```
+
+Behaves exactly the same as jQuery's css method, but saves the original 
+state of the properties that are changed. For more ways to uses this 
+method to set css properties look up jQuery's css method documentation.
+
+###css restore method
+```JavaScript
+$(selector).jiro('cssRestore');
+```
+
+Restores all the css properties, that have been set with the jiro css 
+method, to the values they were before being changed.
 
 ###Upcoming features
 breakpoints sync'ed with CSS @media
