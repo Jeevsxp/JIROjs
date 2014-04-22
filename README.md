@@ -28,7 +28,7 @@ Insert after jQuery like this:
 <!-- jQuery -->
 	<script type="text/javascript" src="scripts/jquery-x.x.x.min.js"></script>
 <!-- jiro -->
-	<script type="text/javascript" src="jiro-1.1.0.min.js"></script>
+	<script type="text/javascript" src="jiro-1.1.1.min.js"></script>
 ```
 Make sure the objects being used have been loaded by the browser.
 
